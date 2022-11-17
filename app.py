@@ -77,19 +77,26 @@ def attractions():
 				return jsonify(response_data)
 			response_data = {"data": query_result, "nextPage": page + 1}
 			return jsonify(response_data)
-
-	except TypeError as err:
 		error_message = {
 			"error": True,
-			"message": f"{err}"
+			"message": "請給定page值，謝謝"
 		}
-		return jsonify(error_message), 500
+		return jsonify(error_message), 400
+
 	except ValueError as err:
 		error_message = {
 			"error": True,
 			"message": f"{err}"
 		}
+		return jsonify(error_message), 400
+
+	except Exception as err:
+		error_message = {
+			"error": True,
+			"message": f"{err}"
+		}
 		return jsonify(error_message), 500
+		
 	finally:
 		db.close()
 

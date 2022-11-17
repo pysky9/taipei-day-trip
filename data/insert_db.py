@@ -3,6 +3,16 @@ from mysql.connector.pooling import MySQLConnectionPool
 import json
 from password import password
 
+db = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    password = password
+)
+
+mycursor = db.cursor()
+mycursor.execute("CREATE DATABASE attractions")
+
+
 db_pool = MySQLConnectionPool(
     pool_name = "attraction_pool",
     pool_size = 2,
@@ -13,6 +23,19 @@ db_pool = MySQLConnectionPool(
     password = password
 )
 
+try:
+    db = db_pool.get_connection()
+    table = db.cursor()
+    attraction_table_sql = "create table attraction(id INT NOT NULL PRIMARY KEY, name VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, description VARCHAR(2500) NOT NULL, images JSON);"
+    trafic_info_table_sql = "CREATE TABLE trafic_info(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, attraction_id INT NOT NULL, address varchar(255), mrt varchar(255), direction varchar(1000), longitude varchar(50) not null, latitude varchar(50) not null, foreign key(attraction_id) references attraction(id));"
+    info_detail_table_sql = "create table info_detail(id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, attraction_id INT NOT NULL, rownumber int, memo_time varchar(500), poi varchar(10), rate int, date varchar(15), ref_wp int, avbegin varchar(15), langinfo int, serial_no varchar(500), idpt varchar(10), avend varchar(15), foreign key(attraction_id) references attraction(id));"
+    table.execute(attraction_table_sql)
+    table.execute(trafic_info_table_sql)
+    table.execute(info_detail_table_sql)
+except Exception as err:
+    print(err)
+finally:
+    db.close()
 
 with open("taipei-attractions.json", "r", encoding = "utf-8") as file :
     row_data = json.load(file)
