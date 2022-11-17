@@ -11,7 +11,8 @@ db_pool = MySQLConnectionPool(
     host = "localhost",
     database = "attractions",
     user = "root",
-    password = password
+    password = password,
+	auth_plugin='caching_sha2_password'
 )
 
 app=Flask(__name__)
