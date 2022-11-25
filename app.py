@@ -15,7 +15,7 @@ db_pool = MySQLConnectionPool(
 	auth_plugin='caching_sha2_password'
 )
 
-app=Flask(__name__)
+app=Flask(__name__, static_folder = "public", static_url_path = "/")
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
@@ -45,8 +45,9 @@ def attractions():
 
 		if get_page and keyword == None:
 			page = int(get_page)
-			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id LIMIT %s, %s;"
-			value = (page * 12, 12) 
+			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
+					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id LIMIT %s, %s;"
+			value = (page * 12, 13) 
 			query.execute(sql, value)
 			query_result = query.fetchall()
 			for item in query_result:
@@ -55,16 +56,19 @@ def attractions():
 			if query_result == []:
 				response_data = {"data": query_result, "nextPage": None}
 				return jsonify(response_data)
-			if len(query_result) < 12: 
+			if len(query_result) <= 12: 
 				response_data = {"data": query_result, "nextPage": None}
 				return jsonify(response_data)
+			query_result.pop()
 			response_data = {"data": query_result, "nextPage": page + 1}
 			return jsonify(response_data)
 		
 		elif get_page and keyword:
 			page = int(get_page)
-			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id WHERE category = %s OR name LIKE %s LIMIT %s, %s;"
-			value = (keyword, f"%{keyword}%", page * 12, 12) 
+			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
+					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id \
+						WHERE category = %s OR name LIKE %s LIMIT %s, %s;"
+			value = (keyword, f"%{keyword}%", page * 12, 13) 
 			query.execute(sql, value)
 			query_result = query.fetchall()
 			for item in query_result:
@@ -73,14 +77,15 @@ def attractions():
 			if query_result == []:
 				response_data = {"data": query_result, "nextPage": None}
 				return jsonify(response_data)
-			if len(query_result) < 12: 
+			if len(query_result) <= 12: 
 				response_data = {"data": query_result, "nextPage": None}
 				return jsonify(response_data)
+			query_result.pop()
 			response_data = {"data": query_result, "nextPage": page + 1}
 			return jsonify(response_data)
 		error_message = {
 			"error": True,
-			"message": "請給定page值，謝謝"
+			"message": "請提供搜尋資料，謝謝"
 		}
 		return jsonify(error_message), 400
 
@@ -106,7 +111,9 @@ def attraction_site(attractionId):
 		try:
 			db = db_pool.get_connection()
 			query = db.cursor(dictionary=True)
-			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id WHERE attraction.id = %s;"
+			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
+					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id \
+						WHERE attraction.id = %s;"
 			query.execute(sql, (attractionId,))
 			data = query.fetchone()
 			image =json.loads(data["images"])
