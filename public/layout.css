@@ -1,0 +1,334 @@
+body{
+    margin: 0;
+}
+
+
+
+.navContainer{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;/*滾動時不會被首頁圖遮住*/
+    background: #FFFFFF;
+}
+
+.nav{
+    display: flex;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 54px;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+
+}
+
+.title{
+    flex: none;
+    width: 150px;
+    height: 34px;
+    line-height: 34px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: #448899;
+}
+
+.nav-item{
+    flex: auto;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 34px;
+    text-align: end;
+
+}
+
+.item{
+    flex: none;
+    line-height: 34px;
+    margin-left: 20px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+}
+
+.headerContainer{
+    position: relative;
+    margin-top: 54px;
+    background: url(../welcome.png);
+    background-size: cover;
+    width: 100%;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+}
+
+.slogan-1{
+    flex: none;
+    position: absolute;
+    top: 85px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    color: #F8F8F8;
+    text-shadow: 0px 0px 30px #AABBCC;
+}
+
+.slogan-2{
+    flex: none;
+    position: absolute;
+    top: 141px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #F8F8F8;
+}
+
+.search{
+    flex: none;
+    position: absolute;
+    top: 188px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    z-index: 10;/*選項區塊z-index要高於透明層 這樣才有辦法點擊輸入框*/
+}
+
+.searchBar{
+    flex: none;
+}
+
+.searchIcon{
+    flex: none;
+}
+
+.inputBar{
+    width: 400px;
+    height: 46px;
+    background: #FFFFFF;
+    border: 0px; /*去除輸入欄位的邊框*/
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+.icon{
+    width: 60px;
+    height: 46px;
+    background: url(../icon_search.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #448899;
+}
+
+.container{
+    display: grid;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    grid-template-columns: repeat(4, 270px);
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+
+
+.siteinfo{
+
+    border: 1px solid #D0D0D0;
+}
+
+.site{
+    position: relative;
+    height: 197px;
+}
+
+.sitePic{
+    /* background-size: cover; */
+    width: 270px;
+    height: 197px;
+}
+
+.siteName{
+    position: absolute;
+    bottom: 0;
+    background: rgb(0,0,0);
+    background: rgb(0,0,0,0.6);
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.name{
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+.description{
+    display: flex;
+    width: 90%;
+    height: 45px;
+    line-height: 45px;
+    background: #FFFFFF;
+    justify-content: space-between;
+    padding-left: 10px;
+    /* padding: 10px; */
+}
+
+.mrt, .cat{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #757575;
+
+}
+.err{
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+/* 搜尋選項 */
+/* 透明層 涵蓋整個瀏覽視窗 用途: 點擊選項以外區域 透過JS關閉選項 */
+.overlapping{
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2;
+}
+
+
+.itemsContainer{
+    display:none;
+    flex: none;
+    width: 1200px;
+    position:absolute;
+    top: 230px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+
+}
+
+
+#itemContainer{
+    display: grid;
+    width: 400px;
+    height: 162px;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px 10px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #aabbcc;
+    align-items: center;
+}
+
+.selectItem{
+    width: 90px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    margin-left: 15px;
+    cursor: pointer; /*設定游標形狀*/
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    text-align:center
+
+}
+
+.selectItem:hover, .selectItem:active{
+    width: 90px;
+    height: 40px;
+    background: #E8E8E8;
+    border-radius: 5px;
+}
+
+.dropdownContent span{
+    display: block;
+}
+
+
+
+/* 頁尾 */
+.footer{
+    display: flex;
+    /* position: fixed;
+    bottom: 0px; */
+    /* width: 100vw; */
+    height: 104px;
+    justify-content: center;
+    background: #757575;
+    margin-top: 30px;
+
+}
+
+.footerContent{
+    flex: none;
+
+    line-height: 104px; /*因區塊有設定高度，line-height與區塊同高，可讓文字區塊可以垂直居中*/
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+@media(max-width: 1200px){
+    .nav, .slogan-1, .slogan-2, .search, .itemsContainer{width: 90%}
+    /* .headerContainer{width: 90%} */
+    .container{
+        width: 90%;
+        grid-template-columns: repeat(auto-fill,minmax(270px, auto));
+    }
+    /*object-fit 可以讓圖片自動吻合容器大小*/
+    .sitePic{width: 100%; object-fit: cover;}
+    /* .footer{width: 90%} */
+}
+
+@media(max-width: 640px){
+
+    .itemsContainer{width: 90%}
+    .inputBar{width: 230px;}
+    .searchIcon{width: 60px;}
+    #itemContainer{width: 322px;}
+    .selectItem{
+        width: 60px;}
+    .selectItem:hover, .selectItem:active{
+        width: 60px;
+    }
+    .container{
+        grid-template-columns: 270px;
+        justify-content: center;}
+}
