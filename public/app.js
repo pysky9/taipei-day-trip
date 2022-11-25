@@ -92,7 +92,7 @@ let nextPages = function(url){
         if (data["nextPage"] == null){
             page = data["nextPage"];
         }else {
-            page++;
+            page = data["nextPage"];
         }
         // fetch結束前 將isloading調為false
         isloading = false;
