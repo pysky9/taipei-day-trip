@@ -2,13 +2,11 @@ body{
     margin: 0;
 }
 
-
-
 .navContainer{
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 10;/*滾動時不會被首頁圖遮住*/
+    z-index: 10;
     background: #FFFFFF;
 }
 
@@ -21,7 +19,6 @@ body{
     align-items: center;
     justify-content: center;
     background: #FFFFFF;
-
 }
 
 .title{
@@ -43,7 +40,6 @@ body{
     align-items: center;
     height: 34px;
     text-align: end;
-
 }
 
 .item{
@@ -105,7 +101,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    z-index: 10;/*選項區塊z-index要高於透明層 這樣才有辦法點擊輸入框*/
+    z-index: 10;
 }
 
 .searchBar{
@@ -120,7 +116,7 @@ body{
     width: 400px;
     height: 46px;
     background: #FFFFFF;
-    border: 0px; /*去除輸入欄位的邊框*/
+    border: 0px;
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
@@ -149,10 +145,7 @@ body{
     row-gap: 30px;
 }
 
-
-
 .siteinfo{
-
     border: 1px solid #D0D0D0;
 }
 
@@ -162,7 +155,6 @@ body{
 }
 
 .sitePic{
-    /* background-size: cover; */
     width: 270px;
     height: 197px;
 }
@@ -178,7 +170,6 @@ body{
 }
 
 .name{
-
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
@@ -195,7 +186,6 @@ body{
     background: #FFFFFF;
     justify-content: space-between;
     padding-left: 10px;
-    /* padding: 10px; */
 }
 
 .mrt, .cat{
@@ -204,15 +194,14 @@ body{
     font-weight: 500;
     font-size: 16px;
     color: #757575;
-
 }
+
 .err{
     width: 100vw;
     height: 100vh;
-    z-index: 2;
+    z-index: 0;
 }
-/* 搜尋選項 */
-/* 透明層 涵蓋整個瀏覽視窗 用途: 點擊選項以外區域 透過JS關閉選項 */
+
 .overlapping{
     top: 0;
     left: 0;
@@ -222,7 +211,6 @@ body{
     background-color: rgba(0, 0, 0, 0);
     z-index: 2;
 }
-
 
 .itemsContainer{
     display:none;
@@ -234,9 +222,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     z-index: 10;
-
 }
-
 
 #itemContainer{
     display: grid;
@@ -256,14 +242,13 @@ body{
     line-height: 40px;
     border-radius: 5px;
     margin-left: 15px;
-    cursor: pointer; /*設定游標形狀*/
+    cursor: pointer;
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     color: #000000;
     text-align:center
-
 }
 
 .selectItem:hover, .selectItem:active{
@@ -277,26 +262,17 @@ body{
     display: block;
 }
 
-
-
-/* 頁尾 */
 .footer{
     display: flex;
-    /* position: fixed;
-    bottom: 0px; */
-    /* width: 100vw; */
     height: 104px;
     justify-content: center;
     background: #757575;
     margin-top: 30px;
-
 }
 
 .footerContent{
     flex: none;
-
-    line-height: 104px; /*因區塊有設定高度，line-height與區塊同高，可讓文字區塊可以垂直居中*/
-
+    line-height: 104px; 
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
@@ -307,18 +283,19 @@ body{
 
 @media(max-width: 1200px){
     .nav, .slogan-1, .slogan-2, .search, .itemsContainer{width: 90%}
-    /* .headerContainer{width: 90%} */
     .container{
         width: 90%;
         grid-template-columns: repeat(auto-fill,minmax(270px, auto));
     }
-    /*object-fit 可以讓圖片自動吻合容器大小*/
-    .sitePic{width: 100%; object-fit: cover;}
-    /* .footer{width: 90%} */
+
+    .sitePic{
+        width: 100%; 
+        object-fit: cover;
+    }
+
 }
 
 @media(max-width: 640px){
-
     .itemsContainer{width: 90%}
     .inputBar{width: 230px;}
     .searchIcon{width: 60px;}
