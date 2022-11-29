@@ -5,26 +5,23 @@ let keyword;
 let newDiv = document.querySelector(".container");
 let foot = document.querySelector(".footer");
 
-const observer = new IntersectionObserver((entries, observer) => {
-    for (const entry of entries){
+const observer = new IntersectionObserver((entries)=>{
+    if (entries[0].isIntersecting){
         if(page == null) return;
-        if(entry.isIntersecting){
-            if(keyword){
-                url = `/api/attractions?page=${page}&keyword=${keyword}`;
+        if(keyword){
+            url = `/api/attractions?page=${page}&keyword=${keyword}`;
+            nextPages(url);
+        }else{
+            if(page === 0){
+                url = `/api/attractions?page=${page}`;
                 nextPages(url);
-            }else{
-                if(page === 0){
-                    url = `/api/attractions?page=${page}`;
-                    nextPages(url);
-                }
-                else if(page){
-                    url = `/api/attractions?page=${page}`;
-                    nextPages(url);
-                }
             }
-        }
+            else if(page){
+                url = `/api/attractions?page=${page}`;
+                nextPages(url);
+            }
     }
-},{threshold: 1});
+}},{threshold: 1});
 
 observer.observe(foot);
 
@@ -75,7 +72,14 @@ let nextPages = function(url){
             catspan.innerText = siteData[i]["category"];
             descriptionDiv.appendChild(catspan);
             siteInfoDiv.appendChild(descriptionDiv);
+
+            // 點擊景點 跳到attraction頁面
+            siteInfoDiv.addEventListener('click', function(evt){
+                location.href = `/attraction/${siteData[i]["id"]}`;
+            })
+
             newDiv.appendChild(siteInfoDiv)
+
         }
         page = data["nextPage"];
 
@@ -118,12 +122,16 @@ category()
 
 function showMenu(){
     let elem = document.querySelector(".itemsContainer");
+    let overlapping = document.querySelector(".overlapping");
     elem.style.display="block";
+    overlapping.style.zIndex = "2";
 }
 
 function overMenu(){
     let elem = document.querySelector(".itemsContainer");
+    let overlapping = document.querySelector(".overlapping");
     elem.style.display="none";
+    overlapping.style.zIndex = "0";
 }
 
 function search(){
