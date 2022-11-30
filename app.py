@@ -6,7 +6,7 @@ from data.password import password
 
 db_pool = MySQLConnectionPool(
     pool_name = "attraction_pool",
-    pool_size = 3,
+    pool_size = 4,
     pool_reset_session = True,
     host = "localhost",
     database = "attractions",
