@@ -672,6 +672,7 @@ input[name="periodTime"]{
     .booking{
         width: 95%;
         flex-wrap: wrap;
+        margin-top: 0px;
     }
 
     .bookingContainer{
