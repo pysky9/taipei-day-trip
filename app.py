@@ -1,5 +1,5 @@
 from flask import *
-from api import api
+from attraction_api import api
 
 app=Flask(__name__, static_folder = "public", static_url_path = "/")
 

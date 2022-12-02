@@ -2,8 +2,8 @@ let isloading = false;
 let page = 0;
 let url;
 let keyword;
-let newDiv = document.querySelector(".container");
-let foot = document.querySelector(".footer");
+const newDiv = document.querySelector(".container");
+const foot = document.querySelector(".footer");
 
 const observer = new IntersectionObserver((entries)=>{
     if (entries[0].isIntersecting){
@@ -104,16 +104,16 @@ function category(){
             newDiv.appendChild(itemDiv);
 
             function choose(evt){
-                let elem = document.querySelector(".inputBar");
+                const elem = document.querySelector(".inputBar");
                 elem.value = itemDiv.textContent;
 
-                let elemMenu = document.querySelector(".itemsContainer");
+                const elemMenu = document.querySelector(".itemsContainer");
                 elemMenu.style.display="none";
             }
             itemDiv.addEventListener("click", choose);
         }
         itemcontainerDiv.appendChild(newDiv);
-        let searchElem = document.querySelector(".search");
+        const searchElem = document.querySelector(".search");
         searchElem.insertAdjacentElement("afterend", itemcontainerDiv);
     });
 
@@ -121,29 +121,29 @@ function category(){
 category()
 
 function showMenu(){
-    let elem = document.querySelector(".itemsContainer");
-    let overlapping = document.querySelector(".overlapping");
+    const elem = document.querySelector(".itemsContainer");
+    const overlapping = document.querySelector(".overlapping");
     elem.style.display="block";
     overlapping.style.zIndex = "2";
 }
 
 function overMenu(){
-    let elem = document.querySelector(".itemsContainer");
-    let overlapping = document.querySelector(".overlapping");
+    const elem = document.querySelector(".itemsContainer");
+    const overlapping = document.querySelector(".overlapping");
     elem.style.display="none";
     overlapping.style.zIndex = "0";
 }
 
 function search(){
     page = 0;
-    let inputElement = document.querySelector(".inputBar");
+    const inputElement = document.querySelector(".inputBar");
     keyword = inputElement.value;
     if(keyword=="其他"){
         keyword = "其  他"
     };
 
     if(!keyword){
-        let errDiv = document.createElement("div");
+        const errDiv = document.createElement("div");
         newDiv.innerHTML = "";
         errDiv.className = "err";
         errDiv.style.display = "block";
