@@ -29,7 +29,9 @@ def attractions():
 		if get_page and keyword == None:
 			page = int(get_page)
 			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
-					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id LIMIT %s, %s;"
+					FROM attraction \
+					INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id \
+					LIMIT %s, %s;"
 			value = (page * 12, 13) 
 			query.execute(sql, value)
 			query_result = query.fetchall()
@@ -50,7 +52,8 @@ def attractions():
 			page = int(get_page)
 			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
 					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id \
-						WHERE category = %s OR name LIKE %s LIMIT %s, %s;"
+					WHERE category = %s OR name LIKE %s \
+					LIMIT %s, %s;"
 			value = (keyword, f"%{keyword}%", page * 12, 13) 
 			query.execute(sql, value)
 			query_result = query.fetchall()
@@ -96,7 +99,7 @@ def attraction_site(attractionId):
 			query = db.cursor(dictionary=True)
 			sql = "SELECT attraction.id, name, category, description, address, direction AS transport, mrt, latitude AS lat, longitude AS lng, images \
 					FROM attraction INNER JOIN trafic_info ON attraction.id = trafic_info.attraction_id \
-						WHERE attraction.id = %s;"
+					WHERE attraction.id = %s;"
 			query.execute(sql, (attractionId,))
 			data = query.fetchone()
 			image =json.loads(data["images"])

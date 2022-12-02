@@ -1,21 +1,23 @@
-let fee = document.querySelector(".fee");
-let carouselName = document.querySelector(".carouselName");
-let carouselCategory = document.querySelector(".carouselCategory");
-let carouselMrt = document.querySelector(".carouselMrt");
-let siteDetail = document.querySelector(".siteDetail");
-let address = document.querySelector(".address");
-let mrtInfo = document.querySelector(".mrtInfo");
+const fee = document.querySelector(".fee");
+const carouselName = document.querySelector(".carouselName");
+const carouselCategory = document.querySelector(".carouselCategory");
+const carouselMrt = document.querySelector(".carouselMrt");
+const siteDetail = document.querySelector(".siteDetail");
+const address = document.querySelector(".address");
+const mrtInfo = document.querySelector(".mrtInfo");
+const right = document.querySelector(".leftArrow");
+const left = document.querySelector(".rightArrow");
+
 let pathName = window.location.pathname;
 let url = `/api${pathName}`;
 let clickPage = 0;
-let right = document.querySelector(".leftArrow");
-let left = document.querySelector(".rightArrow");
+
 
 function getData(){
     fetch(url).then(function(response){
         return response.json();
     }).then(function(data){
-        let siteData = data["data"];
+        const siteData = data["data"];
         carouselName.textContent = siteData["name"];
         carouselCategory.textContent = siteData["category"];
         carouselMrt.textContent = siteData["mrt"];
@@ -23,9 +25,9 @@ function getData(){
         address.textContent = siteData["address"];
         mrtInfo.textContent = siteData["transport"];
 
+        const leftArrow = document.querySelector(".leftArrow")
+        const rightArrow = document.querySelector(".rightArrow");
         let images = siteData["images"];
-        let leftArrow = document.querySelector(".leftArrow")
-        let rightArrow = document.querySelector(".rightArrow");
         let dotContainer = document.createElement("div");
         dotContainer.className = "dotCircle";
         for (let i = 0; i < images.length; i++){
@@ -52,8 +54,9 @@ function getData(){
 getData();
 
 right.addEventListener("click",function(){
-    let imageRoll = document.querySelectorAll(".carouselPic");
-    let dotRoll = document.querySelectorAll(".dot");
+    const imageRoll = document.querySelectorAll(".carouselPic");
+    const dotRoll = document.querySelectorAll(".dot");
+
     imageRoll[clickPage].style.display = "none";
     dotRoll[clickPage].style.backgroundColor = "#FFFFFF";
     clickPage++;
@@ -68,8 +71,8 @@ right.addEventListener("click",function(){
 })
 
 left.addEventListener("click", function(){
-    let imageRoll = document.querySelectorAll(".carouselPic");
-    let dotRoll = document.querySelectorAll(".dot");
+    const imageRoll = document.querySelectorAll(".carouselPic");
+    const dotRoll = document.querySelectorAll(".dot");
     let imageLength = imageRoll.length
     imageRoll[clickPage].style.display = "none";
     dotRoll[clickPage].style.backgroundColor = "#FFFFFF";
