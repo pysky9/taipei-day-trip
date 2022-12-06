@@ -1,5 +1,6 @@
 from flask import *
 from attraction_api import api
+from membership_api import membership
 
 app=Flask(__name__, static_folder = "public", static_url_path = "/")
 
@@ -8,6 +9,7 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
 
 app.register_blueprint(api, url_prefix="/api")
+app.register_blueprint(membership, url_prefix="/api")
 
 # Pages
 @app.route("/")

@@ -5,6 +5,7 @@ let keyword;
 const newDiv = document.querySelector(".container");
 const foot = document.querySelector(".footer");
 
+
 const observer = new IntersectionObserver((entries)=>{
     if (entries[0].isIntersecting){
         if(page == null) return;
