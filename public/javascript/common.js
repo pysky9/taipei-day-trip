@@ -51,11 +51,12 @@ memberStatus.addEventListener("click", function(event){
 
 })
 
+const btnInfo = document.querySelector("#btnInfo");
 function clicked(){
-    const btnInfo = document.querySelector("#btnInfo");
+    
     if(btnInfo.textContent === "登入帳戶"){
         login();
-    }else{
+    }else if (btnInfo.textContent === "註冊新帳戶"){
         signup();
     }
 }
@@ -86,11 +87,14 @@ function login(){
         memberContainer.style.top = "225px";
         emails.addEventListener("click", function(event){
             infoElem.remove();
+            memberContainer.style.height = "265px";
+            memberContainer.style.top = "210px";
+        });
+        btnInfo.addEventListener("click", function(event){
+            infoElem.remove();
             names.value = "";
             emails.value = "";
             passwords.value = "";
-            memberContainer.style.height = "265px";
-            memberContainer.style.top = "210px";
         });
     })
 };
@@ -122,11 +126,14 @@ function signup(){
         memberContainer.style.top = "258px";
         memberBoxUsername.addEventListener("click", function(event){
             infoElem.remove();
+            memberContainer.style.height = "322px";
+            memberContainer.style.top = "238px";
+        });
+        btnInfo.addEventListener("click", function(event){
+            infoElem.remove();
             names.value = "";
             emails.value = "";
             passwords.value = "";
-            memberContainer.style.height = "322px";
-            memberContainer.style.top = "238px";
         });
     })
 }
