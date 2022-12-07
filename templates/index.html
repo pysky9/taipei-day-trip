@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="/css/layout.css"/>
         <script src="/javascript/app.js" defer></script>
+        <script src="/javascript/common.js" defer></script>
         <title>台北一日遊</title>
     </head>
     <body>
@@ -13,7 +14,7 @@
                 <div class="title"><a href="/" style="text-decoration:none; color: #448899;">台北一日遊</a></div>
                 <div class="nav-item">
                     <div class="item">預定行程</div>
-                    <div class="item">登入/註冊</div>
+                    <div class="item" id="loginBtnStatus">登入/註冊</div>
                 </div>
             </div>
         </div>
@@ -25,6 +26,18 @@
                 <div class="searchIcon" onclick="search();"><img class="icon"/></div>
             </div>
         </div>
+        <div class="memberblock" onclick="loginDisapear();"></div>
+        <div class="memberContainer" >
+            <div class="memberPrefix"></div>
+            <img src="/image/close.png" class="closeImg" onclick="loginDisapear();">
+            <div class="memberTitle">登入會員帳號</div><!--點擊登入就切換 登入會員帳號-->
+            <div class="memberBoxUsername"><input type="text" name="name" placeholder="輸入姓名" class="memberInputBar" id="names" pattern="[A-Za-z]{3}" required /></div> <!--登入狀態就隱藏 display:none 點註冊顯示 同時改變memberContainer 高度-->
+            <div class="memberBox"><input type="email" name="email" placeholder="輸入電子郵件" class="memberInputBar" id="emails" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required /></div>
+            <div class="memberBox"><input type="password" name="password" placeholder="輸入密碼" class="memberInputBar" id="passwords" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}" required /></div>
+            <button class="memberBtn" id="btnInfo" onclick="clicked();">登入帳戶</button> <!--點登入就切換 登入帳戶-->
+            <div class="memberStatus">還沒有帳戶?點此註冊</div> <!--點登入就切換 還沒有帳戶?點此註冊--> 
+        </div>
+
         <div class="overlapping" onclick="overMenu();"></div>
         <div class="container"></div>
         <div class="footer"><div class="footerContent">COPYRIGHT @ 2022 台北一日遊</div></div>

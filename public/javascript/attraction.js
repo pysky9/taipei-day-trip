@@ -1,3 +1,4 @@
+const title = document.querySelector("title");
 const fee = document.querySelector(".fee");
 const carouselName = document.querySelector(".carouselName");
 const carouselCategory = document.querySelector(".carouselCategory");
@@ -18,6 +19,7 @@ function getData(){
         return response.json();
     }).then(function(data){
         const siteData = data["data"];
+        title.textContent = `台北一日遊 | ${siteData["name"]}`;
         carouselName.textContent = siteData["name"];
         carouselCategory.textContent = siteData["category"];
         carouselMrt.textContent = siteData["mrt"];
