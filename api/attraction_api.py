@@ -1,24 +1,19 @@
 from flask import *
-import mysql.connector
-from mysql.connector.pooling import MySQLConnectionPool
-from data.password import password
 
-api = Blueprint("api", __name__)
+from api.create_blueprint import blueprints
+from data.create_connection_pool import create_connection_pool
 
-db_pool = MySQLConnectionPool(
-    pool_name = "attraction_pool",
-    pool_size = 4,
-    pool_reset_session = True,
-    host = "localhost",
-    database = "attractions",
-    user = "root",
-    password = password,
-	auth_plugin='caching_sha2_password'
-)
+attractions = blueprints("attractions")
+
+db_pool = create_connection_pool("attraction_pool", "attractions")
 
 
-@api.route("/attractions")
-def attractions():
+@attractions.route("/attraction/<id>")
+def attraction(id):
+	return render_template("attraction.html")
+
+@attractions.route("/api/attractions")
+def attractions_data():
 	get_page = request.args.get("page", None)
 	keyword = request.args.get("keyword", None)
 
@@ -92,7 +87,7 @@ def attractions():
 	finally:
 		db.close()
 
-@api.route("/attraction/<attractionId>")
+@attractions.route("/api/attraction/<attractionId>")
 def attraction_site(attractionId):
 		try:
 			db = db_pool.get_connection()
@@ -121,7 +116,7 @@ def attraction_site(attractionId):
 		finally:
 			db.close()
 
-@api.route("/categories")
+@attractions.route("/api/categories")
 def category():
 	try:
 		db = db_pool.get_connection()
