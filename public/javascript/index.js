@@ -34,7 +34,7 @@ let nextPages = function(url){
     ).then(function(data){
         let siteData = data["data"];
         if(siteData.length == 0){
-            let errDiv = document.createElement("div");
+            const errDiv = document.createElement("div");
             errDiv.className = "err";
             errDiv.style.display = "block";
             errDiv.innerText = "查無此關鍵字"; 
@@ -43,18 +43,18 @@ let nextPages = function(url){
             document.querySelector(".err").style.display = "none";
         }
         for(let i = 0; i < siteData.length; i++){
-            let siteInfoDiv = document.createElement("div");
+            const siteInfoDiv = document.createElement("div");
             siteInfoDiv.className = "siteinfo";
 
-            let siteDiv = document.createElement("div");
+            const siteDiv = document.createElement("div");
             siteDiv.className = "site";
-            let sitePicDiv = document.createElement("img");
+            const sitePicDiv = document.createElement("img");
             sitePicDiv.className = "sitePic";
             sitePicDiv.src= siteData[i]["images"][0];
-            let siteNameDiv = document.createElement("div");
+            const siteNameDiv = document.createElement("div");
             siteNameDiv.className = "siteName";
             
-            let namespan = document.createElement("span");
+            const namespan = document.createElement("span");
             namespan.className = "name";
             namespan.innerText = siteData[i]["name"];
             siteNameDiv.appendChild(namespan);
@@ -62,13 +62,13 @@ let nextPages = function(url){
             siteDiv.appendChild(siteNameDiv);
             siteInfoDiv.appendChild(siteDiv);
 
-            let descriptionDiv = document.createElement("div");
+            const descriptionDiv = document.createElement("div");
             descriptionDiv.className = "description";
-            let mrtspan = document.createElement("span");
+            const mrtspan = document.createElement("span");
             mrtspan.className = "mrt";
             mrtspan.innerText = siteData[i]["mrt"];
             descriptionDiv.appendChild(mrtspan);
-            let catspan = document.createElement("span");
+            const catspan = document.createElement("span");
             catspan.className = "cat";
             catspan.innerText = siteData[i]["category"];
             descriptionDiv.appendChild(catspan);
@@ -93,13 +93,13 @@ function category(){
         function(response){return response.json();}
     ).then(function(data){
         let category = data["data"];
-        let itemcontainerDiv = document.createElement("div");
+        const itemcontainerDiv = document.createElement("div");
         itemcontainerDiv.className = "itemsContainer";
-        let newDiv = document.createElement("div");
+        const newDiv = document.createElement("div");
         newDiv.id = "itemContainer"
         newDiv.className = "dropdownContent"
         for(let i = 0; i < category.length; i++){
-            let itemDiv = document.createElement("div");
+            const itemDiv = document.createElement("div");
             itemDiv.className = "selectItem";
             itemDiv.innerText = category[i];
             newDiv.appendChild(itemDiv);
