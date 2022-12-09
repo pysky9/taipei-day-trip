@@ -1,6 +1,9 @@
 from flask import *
-from attraction_api import api
-from membership_api import membership
+
+from api.attraction_api import attractions
+from api.membership_api import membership
+from api.booking import bookings
+from api.home_page import home_page
 
 app=Flask(__name__, static_folder = "public", static_url_path = "/")
 
@@ -8,21 +11,9 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
 
-app.register_blueprint(api, url_prefix="/api")
-app.register_blueprint(membership, url_prefix="/api")
-
-# Pages
-@app.route("/")
-def index():
-	return render_template("index.html")
-@app.route("/attraction/<id>")
-def attraction(id):
-	return render_template("attraction.html")
-@app.route("/booking")
-def booking():
-	return render_template("booking.html")
-@app.route("/thankyou")
-def thankyou():
-	return render_template("thankyou.html")
+app.register_blueprint(attractions)
+app.register_blueprint(membership)
+app.register_blueprint(bookings)
+app.register_blueprint(home_page)
 
 app.run(host = "0.0.0.0", port = 3000)

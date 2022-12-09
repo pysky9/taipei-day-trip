@@ -33,6 +33,10 @@ function loginDisapear(){
 }
 
 memberStatus.addEventListener("click", function(event){
+    const errorInfoElem = document.querySelector(".erriInfo");
+    if (errorInfoElem){
+        errorInfoElem.remove();
+    }
     if(memberStatus.textContent === "已經有帳戶?點此登入"){
         memberContainer.style.height = "265px";
         memberContainer.style.top = "210px";
@@ -75,6 +79,7 @@ function login(){
         return response.json();
     }).then(function(data){
         let infoElem = document.createElement("div");
+        infoElem.className = "erriInfo";
         if(data.ok){
             infoElem.textContent = "登入成功";
             location.reload();
@@ -115,6 +120,7 @@ function signup(){
         return response.json();
     }).then(function(data){
         let infoElem = document.createElement("div");
+        infoElem.className = "erriInfo";
         if(data.ok){
             infoElem.textContent = "註冊成功，請登入";
         }else if (data.error){
