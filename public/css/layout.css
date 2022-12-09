@@ -134,6 +134,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-color: #448899;
+    cursor: pointer;
 }
 
 .container{
@@ -163,12 +164,6 @@ body{
 .sitePic{
     width: 270px;
     height: 197px;
-    
-}
-
-.sitePic:hover{
-    transform:scale(1.2,1.2);
-
 }
 
 .siteName{
@@ -618,15 +613,12 @@ input[name="periodTime"]{
     display:none;/*點登入或註冊 改為visible*/
 }
 
-
-
-
 .memberContainer{
     display: none;
     width: 340px;
-    height: 265px;
+    height: 285px;
     position: absolute;
-    top: 210px;
+    top: 220px;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 12;
@@ -725,8 +717,6 @@ input[name="periodTime"]{
     color: #666666;
     cursor: pointer;
 }
-
-
 
 @media(max-width: 1230px){
     .nav, .slogan-1, .slogan-2, .search, .itemsContainer{width: 90%}

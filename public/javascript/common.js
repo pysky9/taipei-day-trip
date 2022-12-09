@@ -38,8 +38,8 @@ memberStatus.addEventListener("click", function(event){
         errorInfoElem.remove();
     }
     if(memberStatus.textContent === "已經有帳戶?點此登入"){
-        memberContainer.style.height = "265px";
-        memberContainer.style.top = "210px";
+        memberContainer.style.height = "285px";
+        memberContainer.style.top = "220px";
         memberTitle.textContent = "登入會員帳號";
         memberBoxUsername.style.display = "none";
         memberBtn.textContent = "登入帳戶";
@@ -92,8 +92,8 @@ function login(){
         memberContainer.style.top = "225px";
         emails.addEventListener("click", function(event){
             infoElem.remove();
-            memberContainer.style.height = "265px";
-            memberContainer.style.top = "210px";
+            memberContainer.style.height = "285px";
+            memberContainer.style.top = "220px";
         });
         btnInfo.addEventListener("click", function(event){
             infoElem.remove();

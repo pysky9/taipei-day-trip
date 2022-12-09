@@ -11,6 +11,6 @@ def login_query(email, password):
         db.close()
         if result:
             return {"error": False, "result": result}
-        return {"error": True, "message": "帳號密碼錯誤"}
+        return {"error": True, "message": "帳號密碼錯誤", "status_code": 400}
     except Exception as err:
         return {"error": True, "message": f"{err}", "status_code": 500}

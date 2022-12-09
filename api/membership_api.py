@@ -28,8 +28,8 @@ def signup():
         return jsonify({"error": db_result["error"], "message": db_result["message"]}), 400
     elif db_result["error"] and db_result["status_code"] == 500:
         return jsonify({"error": db_result["error"], "message": db_result["message"]}), 500
-    elif db_result["ok"]:
-        return jsonify(db_result), 200
+    
+    return jsonify({"ok": db_result["ok"]}), 200
         
 
 @membership.route("/api/user/auth")
@@ -56,13 +56,14 @@ def login():
 
     # 資料庫驗證
     db_result = login_query(email, password)
-    result = db_result["result"]
+
     if db_result["error"] and db_result["status_code"] == 500:
         return jsonify({"error": db_result["error"], "message": db_result["message"]}), 500
     elif db_result["error"]:
         return jsonify(db_result), 400
 
     # 製作JWT
+    result = db_result["result"]
     resp = make_response(jsonify({"ok": True}))
     id = result["id"]
     name = result["name"]

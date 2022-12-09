@@ -16,7 +16,7 @@ def insert_member(name, email, password):
         values = (name, email, password)
         query_member.execute(sql, values)
         db.commit()
-        return {"ok": True}
+        return {"error": False, "ok": True}
     except (ValueError, TypeError) as err:
         return {"error": True, "message": f"{err}", "status_code": 400}
          
