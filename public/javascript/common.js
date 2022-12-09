@@ -45,8 +45,8 @@ memberStatus.addEventListener("click", function(event){
         memberBtn.textContent = "登入帳戶";
         memberStatus.textContent = "還沒有帳戶?點此註冊";
     }else{
-        memberContainer.style.height = "322px";
-        memberContainer.style.top = "238px";
+        memberContainer.style.height = "342px";
+        memberContainer.style.top = "249px";
         memberTitle.textContent = "註冊會員帳號";
         memberBoxUsername.style.display = "block";
         memberBtn.textContent = "註冊新帳戶";
@@ -78,7 +78,7 @@ function login(){
     }).then(function(response){
         return response.json();
     }).then(function(data){
-        let infoElem = document.createElement("div");
+        const infoElem = document.createElement("div");
         infoElem.className = "erriInfo";
         if(data.ok){
             infoElem.textContent = "登入成功";
@@ -119,7 +119,7 @@ function signup(){
     }).then(function(response){
         return response.json();
     }).then(function(data){
-        let infoElem = document.createElement("div");
+        const infoElem = document.createElement("div");
         infoElem.className = "erriInfo";
         if(data.ok){
             infoElem.textContent = "註冊成功，請登入";
@@ -132,8 +132,8 @@ function signup(){
         memberContainer.style.top = "258px";
         memberBoxUsername.addEventListener("click", function(event){
             infoElem.remove();
-            memberContainer.style.height = "322px";
-            memberContainer.style.top = "238px";
+            memberContainer.style.height = "342px";
+            memberContainer.style.top = "249px";
         });
         btnInfo.addEventListener("click", function(event){
             infoElem.remove();

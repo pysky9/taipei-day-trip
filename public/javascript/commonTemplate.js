@@ -44,6 +44,7 @@ function footer(){
     const indexLastDiv = document.querySelector(".container");
     const attractionLastDiv = document.querySelector(".trafficInfo")
 
+
     const footerContainer = document.createElement("div");
     footerContainer.className = "footer";
     const footerContent = document.createElement("div");

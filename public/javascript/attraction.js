@@ -29,11 +29,12 @@ function getData(){
 
         const leftArrow = document.querySelector(".leftArrow")
         const rightArrow = document.querySelector(".rightArrow");
+        const dotContainer = document.createElement("div");
         let images = siteData["images"];
-        let dotContainer = document.createElement("div");
+        
         dotContainer.className = "dotCircle";
         for (let i = 0; i < images.length; i++){
-            let imgElement = document.createElement("img");
+            const imgElement = document.createElement("img");
             imgElement.className = "carouselPic";
             if(i > 0){
                 imgElement.style.display = "none";
@@ -41,7 +42,7 @@ function getData(){
             imgElement.src = images[i];
             leftArrow.insertAdjacentElement("beforebegin",imgElement)
 
-            let dotElement = document.createElement("span");
+            const dotElement = document.createElement("span");
             dotElement.className = "dot";
             if(i > 0){
                 dotElement.style.backgroundColor = "#FFFFFF";
