@@ -7,6 +7,7 @@
         <script src="/javascript/commonTemplate.js" defer></script>
         <script src="/javascript/attraction.js" defer></script>
         <script src="/javascript/common.js" defer></script>
+        <script src="/javascript/booking.js" defer></script>
         <title>台北一日遊</title>
     </head>
     <body>
@@ -23,9 +24,9 @@
                 <div class="carouselBooking">
                     <div class="bookingHeader">訂購導覽行程</div>
                     <div class="bookingInfo">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-
+                    
                     <span class="dateLabel">選擇日期：</span>
-                    <input type="date" class="dates">
+                    <input type="date" class="dates" required>
 
                     <div>
                         <span class="choosingTimeTitle">選擇時間：</span>
@@ -36,7 +37,7 @@
                         <span class="feeTitle">導覽費用：</span>
                         <span class="fee">新台幣2000元</span>
                     </div>
-                    <div class="bookingBtn">開始預約行程</div>
+                    <button class="bookingBtn">開始預約行程</button>
                 </div>
             </div>
         </div>

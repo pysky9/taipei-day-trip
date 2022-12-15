@@ -13,6 +13,15 @@ let pathName = window.location.pathname;
 let url = `/api${pathName}`;
 let clickPage = 0;
 
+// booking trip
+const morningTime = document.querySelector("#morning");
+const afternoonTime = document.querySelector("#afternoon");
+const dates = document.querySelector(".dates");
+let AttractionPathName = window.location.pathname;
+let travelTime = "morning";
+let travelFees = "2000";
+let AttractionPathNameSplit = AttractionPathName.split("/");
+let siteId = AttractionPathNameSplit[2]
 
 function getData(){
     fetch(url).then(function(response){
@@ -91,9 +100,45 @@ left.addEventListener("click", function(){
 })
 
 function morning(){
-    fee.textContent = "新台幣2000元";
+    fee.textContent = `新台幣2000元`;
+    travelTime = "morning";
+    travelFees = "2000";
 }
 
 function afternoon(){
-    fee.textContent = "新台幣2500元";
+    fee.textContent = `新台幣2500元`;
+    travelTime = "afternoon";
+    travelFees = "2500";
 }
+
+// booking trip button
+const bookingBtn = document.querySelector(".bookingBtn");
+bookingBtn.addEventListener("click",function(event){
+    
+    if (dates.value === ""){
+        const message = "請選擇日期，謝謝。";
+        errorMessageBox(message);
+        return;
+    };
+    
+    requestData = {"attractionId": siteId,
+                    "date": dates.value,
+                    "time": travelTime,
+                    "price": travelFees
+                }
+    fetch("/api/booking", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(requestData)
+    }).then(function(response){
+        return response.json();
+    }).then(function(data){
+        if (data.ok){
+            location.href = `/booking`;
+        }
+        if (data.error){
+            clickLogin();
+        }
+    })
+
+})

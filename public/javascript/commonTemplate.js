@@ -26,6 +26,7 @@ function navBar(){
     navItemContainer.className = "nav-item";
     const bookingSchedule = document.createElement("div");
     bookingSchedule.className = "item";
+    bookingSchedule.id = "bookingTrip";
     bookingSchedule.textContent = "預定行程";
     navItemContainer.appendChild(bookingSchedule);
     const loginSignup = document.createElement("div");
@@ -42,8 +43,7 @@ function navBar(){
 
 function footer(){
     const indexLastDiv = document.querySelector(".container");
-    const attractionLastDiv = document.querySelector(".trafficInfo")
-
+    const attractionLastDiv = document.querySelector(".trafficInfo");
 
     const footerContainer = document.createElement("div");
     footerContainer.className = "footer";
@@ -66,10 +66,10 @@ function loginSignupMenu(){
     backgroundGreyPage.setAttribute("onclick", "loginDisapear();");
     bodyElem.appendChild(backgroundGreyPage);
 
-    const memberContainer = document.createElement("memberContainer");
+    const memberContainer = document.createElement("div");
     memberContainer.className = "memberContainer";
 
-    const memberPrefix = document.createElement("memberPrefix");
+    const memberPrefix = document.createElement("div");
     memberPrefix.className = "memberPrefix";
     memberContainer.appendChild(memberPrefix);
 

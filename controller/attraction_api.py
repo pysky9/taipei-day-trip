@@ -1,6 +1,6 @@
 from flask import *
 
-from api.create_blueprint import blueprints
+from controller.create_blueprint import blueprints
 from data.create_connection_pool import create_connection_pool
 
 attractions = blueprints("attractions")
@@ -16,7 +16,6 @@ def attraction(id):
 def attractions_data():
 	get_page = request.args.get("page", None)
 	keyword = request.args.get("keyword", None)
-
 	try:
 		db = db_pool.get_connection()
 		query = db.cursor(dictionary=True)		

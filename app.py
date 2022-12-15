@@ -1,9 +1,9 @@
 from flask import *
 
-from api.attraction_api import attractions
-from api.membership_api import membership
-from api.booking import bookings
-from api.home_page import home_page
+from controller.attraction_api import attractions
+from controller.membership_api import membership
+from controller.booking import bookings
+from controller.home_page import home_page
 
 app=Flask(__name__, static_folder = "public", static_url_path = "/")
 
