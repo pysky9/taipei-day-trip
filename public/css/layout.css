@@ -518,11 +518,13 @@ input[name="periodTime"]{
     text-align: center;
     background: #448899;
     border-radius: 5px;
+    border: 0px;
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 400;
     font-size: 19px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 
@@ -628,6 +630,7 @@ input[name="periodTime"]{
     text-align: center;
 }
 
+
 .memberPrefix{
     width: 340px;
     height: 10px;
@@ -716,6 +719,37 @@ input[name="periodTime"]{
     font-size: 16px;
     color: #666666;
     cursor: pointer;
+}
+
+/* message dialog window */
+.messageContainer{
+    width: 340px;
+    height: 150px;
+    position: absolute;
+    top: 165px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.messagePrefix{
+    width: 340px;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-radius: 6px 6px 0px 0px;
+}
+
+.messageContent{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #666666;
+    line-height: 150px;
 }
 
 @media(max-width: 1230px){

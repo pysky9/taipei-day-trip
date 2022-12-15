@@ -1,4 +1,4 @@
-
+// import noBookingPage from "./javascript/booking.js";
 const loginBtnStatus = document.querySelector("#loginBtnStatus");
 const memberContainer = document.querySelector(".memberContainer");
 const memberTitle = document.querySelector(".memberTitle");
@@ -7,7 +7,8 @@ const memberBtn = document.querySelector(".memberBtn");
 const memberStatus = document.querySelector(".memberStatus");
 const names = document.querySelector("#names");
 const emails = document.querySelector("#emails");
-const passwords = document.querySelector("#passwords")
+const passwords = document.querySelector("#passwords");
+const bookingTrip = document.querySelector("#bookingTrip");
 
 loginBtnStatus.addEventListener("click", function(event){
     let userStatus = loginBtnStatus.textContent;
@@ -66,6 +67,7 @@ function clicked(){
 }
 
 function login(){
+    
     fetch("/api/user/auth", {
         method: "PUT",
         headers: {
@@ -81,9 +83,9 @@ function login(){
         const infoElem = document.createElement("div");
         infoElem.className = "erriInfo";
         if(data.ok){
-            infoElem.textContent = "登入成功";
             location.reload();
-        }else if(data.error){
+        }
+        else if(data.error){
             infoElem.textContent = `${data.message}`;
         }
         infoElem.style.padding = "5px";
@@ -144,12 +146,15 @@ function signup(){
     })
 }
 
+
 function checkLoginStatus(){
     fetch("/api/user/auth").then(function(response){
         return response.json();
     }).then(function(result){
         if(result.data){
-            loginBtnStatus.textContent = "登出系統"; 
+            let userData = result.data;
+
+            loginBtnStatus.textContent = "登出系統";
         }else{
             loginBtnStatus.textContent = "登入/註冊";
         }
@@ -172,4 +177,48 @@ function logout(){
             location.reload();
         }
     })
+}
+
+// nav-bar booking trip
+bookingTrip.addEventListener("click", function(event){
+    fetch("/api/booking").then(function(response){
+        return response.json();
+    }).then(function(data){
+        if (data.data || data.data === null){
+            location.href = "/booking";
+        }
+        if (data.error){
+            clickLogin();
+        }
+    })
+})
+
+function errorMessageBox(message){
+
+    const bodyElem = document.querySelector("body");
+
+    const messageContainer = document.createElement("div");
+    messageContainer.className = "messageContainer";
+    messageContainer.style.display = "block";
+
+    const messagePrefix = document.createElement("div");
+    messagePrefix.className = "messagePrefix";
+    messageContainer.appendChild(messagePrefix);
+
+    const closeImg = document.createElement("img");
+    closeImg.className = "closeImg";
+    closeImg.src = "/image/close.png";
+    messageContainer.appendChild(closeImg);
+
+    closeImg.addEventListener("click", function(event){
+        messageContainer.style.display = "none";
+    })
+
+    const messageContent = document.createElement("div");
+    messageContent.className = "messageContent";
+    messageContent.textContent = `${message}`;
+    messageContainer.appendChild(messageContent);
+
+    bodyElem.insertAdjacentElement("afterend", messageContainer);
+
 }
