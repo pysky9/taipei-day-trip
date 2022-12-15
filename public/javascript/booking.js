@@ -1,7 +1,7 @@
 let userName;
 let email;
 
-function getUserDataFromPayload(){
+function getUserData(){
     fetch("/api/user/auth").then(function(response){
         return response.json();
     }).then(function(result){
@@ -10,11 +10,12 @@ function getUserDataFromPayload(){
             userName = userData.name;
             email = userData.email;
         }
+        checkBookingStatus();
     })
 }
 
+
 function checkBookingStatus(){
-    getUserDataFromPayload();
     fetch("/api/booking").then(function(response){
         return response.json();
     }).then(function(bookingResult){
