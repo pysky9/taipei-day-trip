@@ -1,6 +1,10 @@
+import os
 import mysql.connector
 from mysql.connector.pooling import MySQLConnectionPool
-from data.password import password
+from dotenv import load_dotenv
+
+load_dotenv()
+password = os.getenv("password")
 
 def create_connection_pool(pool_name, database):
     return MySQLConnectionPool(

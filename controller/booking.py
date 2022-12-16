@@ -1,7 +1,11 @@
+import os
 from flask import *
 import jwt
 from data.create_connection_pool import create_connection_pool
-from data.password import jwt_key
+from dotenv import load_dotenv
+
+load_dotenv()
+jwt_key = os.getenv("jwt_key")
 
 booking_pool = create_connection_pool("booking_pool", "trip_members")
 attraction_pool = create_connection_pool("attraction_pool", "attractions")
