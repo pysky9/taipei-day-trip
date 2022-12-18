@@ -23,10 +23,11 @@ let travelFees = "2000";
 let AttractionPathNameSplit = AttractionPathName.split("/");
 let siteId = AttractionPathNameSplit[2]
 
+// get attraction data 
 function getData(){
     fetch(url).then(function(response){
         return response.json();
-    }).then(function(data){
+    }).then(function(data){s
         const siteData = data["data"];
         title.textContent = `台北一日遊 | ${siteData["name"]}`;
         carouselName.textContent = siteData["name"];
@@ -42,6 +43,7 @@ function getData(){
         let images = siteData["images"];
         
         dotContainer.className = "dotCircle";
+        // get all images of site and show the first image and dot
         for (let i = 0; i < images.length; i++){
             const imgElement = document.createElement("img");
             imgElement.className = "carouselPic";
