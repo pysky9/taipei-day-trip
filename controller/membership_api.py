@@ -3,8 +3,8 @@ from flask import *
 import jwt
 from datetime import datetime, timedelta
 
-from controller.create_blueprint import blueprints
-from controller.member_data_validation import data_validate
+from utils.create_blueprint import blueprints
+from utils.member_data_validation import data_validate
 from data.member.insert_new_member import insert_member
 from data.member.login_query import login_query
 from dotenv import load_dotenv

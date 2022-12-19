@@ -1,7 +1,7 @@
 import os
 from flask import *
 import jwt
-from data.create_connection_pool import create_connection_pool
+from utils.create_connection_pool import create_connection_pool
 from dotenv import load_dotenv
 
 load_dotenv()

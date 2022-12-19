@@ -1,7 +1,7 @@
 from flask import *
 
-from controller.create_blueprint import blueprints
-from data.create_connection_pool import create_connection_pool
+from utils.create_blueprint import blueprints
+from utils.create_connection_pool import create_connection_pool
 
 attractions = blueprints("attractions")
 

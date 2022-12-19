@@ -1,4 +1,4 @@
-from data.create_connection_pool import create_connection_pool
+from utils.create_connection_pool import create_connection_pool
 db_pool = create_connection_pool("members_pool", "trip_members")
 
 def login_query(email, password):
