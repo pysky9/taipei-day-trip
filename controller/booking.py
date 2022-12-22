@@ -49,11 +49,13 @@ def check_booking():
 
         if not_order_status != "not_order":
             return jsonify({"data": None}), 200
+
     except Exception as err:
-        print(f"{err}")
-        error_message = {"error": True, "message": f"{err}"}
+        error_message = {"error": True, "message": "系統錯誤"}
         return jsonify(error_message)
+        
     finally:
+        booking_query.close()
         booking_db.close()
 
     # get data from attraction DB
@@ -112,8 +114,6 @@ def booking_trip():
         error_message = {"error": True, "message": "未挑選日期"}
         return jsonify(error_message), 400
 
-    sql_value = (member_id, attractionId, dates, times, price, not_order)
-
     try:
         db = booking_pool.get_connection()
         query = db.cursor(dictionary = True)
@@ -122,8 +122,10 @@ def booking_trip():
         result = query.fetchone()
         if result == None:
             sql_statement = "INSERT INTO booking (member_id, attractionId, dates, times, price, not_order) VALUES (%s, %s, %s, %s, %s, %s);"
+            sql_value = (member_id, attractionId, dates, times, price, not_order)
         else:
-            sql_statement = "UPDATE booking SET member_id = %s, attractionId = %s, dates = %s, times = %s, price = %s, not_order = %s ;"
+            sql_statement = "UPDATE booking SET member_id = %s, attractionId = %s, dates = %s, times = %s, price = %s, not_order = %s WHERE member_id = %s;"
+            sql_value = (member_id, attractionId, dates, times, price, not_order, member_id)
         query.execute(sql_statement, sql_value)
         db.commit()
         query.close()

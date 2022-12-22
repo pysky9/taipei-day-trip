@@ -27,7 +27,7 @@ let siteId = AttractionPathNameSplit[2]
 function getData(){
     fetch(url).then(function(response){
         return response.json();
-    }).then(function(data){s
+    }).then(function(data){
         const siteData = data["data"];
         title.textContent = `台北一日遊 | ${siteData["name"]}`;
         carouselName.textContent = siteData["name"];

@@ -1,5 +1,14 @@
 let userName;
 let email;
+let attractionId;
+let siteName;
+let siteAddress;
+let imageURL;
+let date;
+let fees;
+let tripTime;
+
+TPDirect.setupSDK(126889, "app_855EHG5Iev5Bv96GQKHmMpCgiKmUqOObJ1nxz7RBZpVGKugBhFClwz5pS58I", "sandbox");
 
 function getUserData(){
     fetch("/api/user/auth").then(function(response){
@@ -13,7 +22,6 @@ function getUserData(){
         checkBookingStatus();
     })
 }
-
 
 function checkBookingStatus(){
     fetch("/api/booking").then(function(response){
@@ -29,19 +37,23 @@ function checkBookingStatus(){
             return;
         }
         let bookingInfo = bookingResult.data;
+
         let attractionData = bookingInfo.attraction;
-        let siteName = attractionData.name;
-        let imageURL = attractionData.image;
-        let address = attractionData.address;
-        let date = bookingInfo.date;
-        let fees = bookingInfo.price;
+        attractionId = attractionData.id;
+        siteName = attractionData.name;
+        imageURL = attractionData.image;
+        siteAddress = attractionData.address;
+        date = bookingInfo.date;
+        fees = bookingInfo.price;
+        console.log(fees);
+        tripTime = bookingInfo.time;
         let time;
-        if (bookingInfo.time === "morning"){
+        if (tripTime === "morning"){
             time = "早上9點到下午4點";
         }else{
             time = "下午2點到晚上9點";
         }
-        bookingInfomation(userName, email, siteName, imageURL, date, time, fees, address);
+        bookingInfomation(userName, email, siteName, imageURL, date, time, fees, siteAddress);
     })
 }
 
@@ -55,7 +67,7 @@ function deleteBooking(){
     })
 }
 
-function bookingInfomation(userName, email, siteName, imageURL, date, time, fees, address){
+function bookingInfomation(userName, email, siteName, imageURL, date, time, fees, siteAddress){
     const bookingUser = document.querySelector(".bookingUser");
     bookingUser.textContent = `您好，${userName}，待預訂的行程如下：`;
 
@@ -92,7 +104,7 @@ function bookingInfomation(userName, email, siteName, imageURL, date, time, fees
     bookingScheduleContainer.appendChild(bookingFees);
     const bookingAddress = document.createElement("div");
     bookingAddress.className = "bookingAddress";
-    bookingAddress.textContent = `地點：${address}`;
+    bookingAddress.textContent = `地點：${siteAddress}`;
     bookingScheduleContainer.appendChild(bookingAddress);
     const deleteImg = document.createElement("img");
     deleteImg.className = "delete";
@@ -144,6 +156,7 @@ function bookingInfomation(userName, email, siteName, imageURL, date, time, fees
     phoneDiv.textContent = "手機號碼：";
     const phoneInputBar = document.createElement("input");
     phoneInputBar.className = "InfoBar";
+    phoneInputBar.id = "phone";
     phoneInputBar.setAttribute("type", "tel");
     phoneInputBar.setAttribute("name", "tel");
     phoneDiv.appendChild(phoneInputBar);
@@ -169,36 +182,33 @@ function bookingInfomation(userName, email, siteName, imageURL, date, time, fees
 
     const creditcardTitle = document.createElement("div");
     creditcardTitle.className = "creditcardTitle";
-    creditcardTitle.textContent = "您的聯絡資訊";
+    creditcardTitle.textContent = "您的付款資訊";
     creditcardInfomation.appendChild(creditcardTitle);
 
     const cardNumber = document.createElement("div");
     cardNumber.className = "creditInfo";
     cardNumber.textContent = "卡片號碼：";
-    const cardNumberInputBar = document.createElement("input");
-    cardNumberInputBar.className = "InfoBar";
-    cardNumberInputBar.setAttribute("type", "text");
-    cardNumberInputBar.setAttribute("placeholder", "**** **** **** ****");
+    const cardNumberInputBar = document.createElement("div");
+    cardNumberInputBar.className = "tpfield";
+    cardNumberInputBar.id = "card-number";
     cardNumber.appendChild(cardNumberInputBar);
     creditcardInfomation.appendChild(cardNumber);
 
     const cardExpireTime = document.createElement("div");
     cardExpireTime.className = "creditInfo";
     cardExpireTime.textContent = "逾期時間：";
-    const cardExpireTimeInputBar = document.createElement("input");
-    cardExpireTimeInputBar.className = "InfoBar";
-    cardExpireTimeInputBar.setAttribute("type", "text");
-    cardExpireTimeInputBar.setAttribute("placeholder", "MM/YY");
+    const cardExpireTimeInputBar = document.createElement("div");
+    cardExpireTimeInputBar.className = "tpfield";
+    cardExpireTimeInputBar.id = "card-expiration-date";
     cardExpireTime.appendChild(cardExpireTimeInputBar);
     creditcardInfomation.appendChild(cardExpireTime);
 
     const cardSecurityCode = document.createElement("div");
     cardSecurityCode.className = "creditInfo";
     cardSecurityCode.textContent = "驗證密碼：";
-    const cardSecurityCodeInputBar = document.createElement("input");
-    cardSecurityCodeInputBar.className = "InfoBar";
-    cardSecurityCodeInputBar.setAttribute("type", "text");
-    cardSecurityCodeInputBar.setAttribute("placeholder", "CVV");
+    const cardSecurityCodeInputBar = document.createElement("div");
+    cardSecurityCodeInputBar.className = "tpfield";
+    cardSecurityCodeInputBar.id = "card-ccv";
     cardSecurityCode.appendChild(cardSecurityCodeInputBar);
     creditcardInfomation.appendChild(cardSecurityCode);
 
@@ -236,8 +246,20 @@ function bookingInfomation(userName, email, siteName, imageURL, date, time, fees
     footerContainer.appendChild(footerContent);
     priceAndOrder.insertAdjacentElement("afterend", footerContainer);
 
+    //--- 金流  ---//
+    TPDirectCardSetup();
+    TPDirect.ccv.setupCardType(TPDirect.CardType.VISA);
+    TPDirect.ccv.setupCardType(TPDirect.CardType.JCB);
+    TPDirect.ccv.setupCardType(TPDirect.CardType.AMEX);
+    TPDirect.ccv.setupCardType(TPDirect.CardType.MASTERCARD);
+    TPDirect.ccv.setupCardType(TPDirect.CardType.UNIONPAY);
+    TPDirect.ccv.setupCardType(TPDirect.CardType.UNKNOWN);
+
+    orderBtn.addEventListener("click",orderSubmit);
+
 }
 
+// -- 使用者沒有預定 動態顯示畫面 -- //
 function noBookingPage(userName){
     const bookingUser = document.querySelector(".bookingUser");
     bookingUser.textContent = `您好，${userName}，待預訂的行程如下：`;
@@ -260,5 +282,187 @@ function noBookingPage(userName){
     footerContainer.style.height = "425px";
     footerContainer.appendChild(footerContent);
     bookingUser.insertAdjacentElement("afterend", footerContainer);
+}
+
+// -- 填寫欄位設定 -- //
+function TPDirectCardSetup(){
+    TPDirect.card.setup({
+        fields: {
+            number: {
+                // css selector
+                element: '#card-number',
+                placeholder: '**** **** **** ****'
+            },
+            expirationDate: {
+                // DOM object
+                element: '#card-expiration-date',
+                placeholder: 'MM / YY'
+            },
+            ccv: {
+                element: '#card-ccv',
+                placeholder: 'ccv'
+            }
+        },
+        styles: {
+            // Style all elements
+            'input': {
+                'color': 'gray'
+            },
+            // Styling ccv field
+            'input.ccv': {
+                'font-size': '16px'
+            },
+            // Styling expiration-date field
+            'input.expiration-date': {
+                'font-size': '16px'
+            },
+            // Styling card-number field
+            'input.card-number': {
+                'font-size': '16px'
+            },
+            // style focus state
+            ':focus': {
+                'color': 'black'
+            },
+            // style valid state
+            '.valid': {
+                'color': 'green'
+            },
+            // style invalid state
+            '.invalid': {
+                'color': 'red'
+            },
+            // Media queries
+            // Note that these apply to the iframe, not the root window.
+            '@media screen and (max-width: 400px)': {
+                'input': {
+                    'color': 'orange'
+                }
+            }
+        },
+        // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+        isMaskCreditCardNumber: true,
+        maskCreditCardNumberRange: {
+            beginIndex: 6,
+            endIndex: 11
+        }
+    })
+}
+
+// -- 點擊"確認訂購並付款"的回應 -- //
+function orderSubmit(event) {
+    event.preventDefault()
+
+    // 取得 TapPay Fields 的 status
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+
+    // 確認是否可以 getPrime
+    if (tappayStatus.canGetPrime === false) {
+        // 判斷哪個欄位錯誤 回應給使用者
+        let message;
+        if (tappayStatus.status.number === 1){
+            message = "卡號欄位還沒有填寫";
+        }else if (tappayStatus.status.number === 2){
+            message = "卡號欄位有錯誤";
+        }else if (tappayStatus.status.expiry === 1){
+            message = "逾期時間欄位還沒有填寫";
+        }else if (tappayStatus.status.expiry === 2){
+            message = "逾期時間欄位有錯誤";
+        }else if (tappayStatus.status.ccv === 1){
+            message = "驗證密碼欄位還沒有填寫";
+        }else {
+            message = "驗證密碼欄位有錯誤";
+        }
+        errorMessageBox(message);
+        return
+    }
+
+    // Get prime
+    TPDirect.card.getPrime((result) => {
+        prime = result.card.prime;
+        sentToServer(prime);
+    })
+}
+
+// -- 付款資料送後端 -- //
+function sentToServer(parameter){
+    const phoneNumber = document.querySelector("#phone");
+    const prime = parameter;
+    console.log(fees)
+    phone = phoneNumber.value;
+    if (!phone){
+        errorMessageBox("請輸入手機號碼，謝謝。");
+        return;
+    }
+    requestData = {
+        "prime": prime,
+        "order": {
+            "price": fees,
+            "trip": {
+                "id": attractionId,
+                "name": siteName,
+                "address": siteAddress,
+                "image": imageURL
+            },
+            "date": date,
+            "time": tripTime
+        },
+        "contact": {
+            "name": userName,
+            "email": email,
+            "phone": phone
+        }
+    }
+    fetch("/api/orders",{
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(requestData)
+    }).then((response) => (response.json())).then(
+        (responseData) => {
+            console.log(responseData);
+            let paymentData = responseData.data;
+            let orderNumber = paymentData.number;
+            let paymentMessage = paymentData.payment.message;
+            console.log("line 429", orderNumber, paymentMessage);
+            if(paymentMessage === "付款成功"){
+                location.replace(`/thankyou?number=${orderNumber}`);
+            }else{
+                errorMessageBox("付款失敗");
+            }
+        }
+    )
+}
+
+function errorMessageBox(message){
+
+    const bodyElem = document.querySelector("body");
+
+    const messageContainer = document.createElement("div");
+    messageContainer.className = "messageContainer";
+    messageContainer.style.display = "block";
+    messageContainer.style.top = "750px";
+
+    const messagePrefix = document.createElement("div");
+    messagePrefix.className = "messagePrefix";
+    messageContainer.appendChild(messagePrefix);
+
+    const closeImg = document.createElement("img");
+    closeImg.className = "closeImg";
+    closeImg.src = "/image/close.png";
+    messageContainer.appendChild(closeImg);
+
+    closeImg.addEventListener("click", function(event){
+        messageContainer.style.display = "none";
+    })
+
+    const messageContent = document.createElement("div");
+    messageContent.className = "messageContent";
+    messageContent.textContent = `${message}`;
+    messageContainer.appendChild(messageContent);
+
+    bodyElem.insertAdjacentElement("afterend", messageContainer);
+
 }
 

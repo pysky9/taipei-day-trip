@@ -44,6 +44,7 @@ function navBar(){
 function footer(){
     const indexLastDiv = document.querySelector(".container");
     const attractionLastDiv = document.querySelector(".trafficInfo");
+    const orderedInfo = document.querySelector(".orderedInfoContainer")
 
     const footerContainer = document.createElement("div");
     footerContainer.className = "footer";
@@ -56,6 +57,9 @@ function footer(){
         indexLastDiv.insertAdjacentElement("afterend", footerContainer);
     }else if (attractionLastDiv){
         attractionLastDiv.insertAdjacentElement("afterend", footerContainer);
+    }else if(orderedInfo){
+        footerContainer.style.height = "530px";
+        orderedInfo.insertAdjacentElement("afterend", footerContainer);
     }
 }
 
