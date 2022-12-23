@@ -9,8 +9,3 @@ home_page = Blueprint("home_page",
 @home_page.route("/")
 def index():
 	return render_template("index.html")
-
-
-@home_page.route("/thankyou")
-def thankyou():
-	return render_template("thankyou.html")

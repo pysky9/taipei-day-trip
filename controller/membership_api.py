@@ -1,12 +1,16 @@
+import os
 from flask import *
 import jwt
 from datetime import datetime, timedelta
 
-from controller.create_blueprint import blueprints
-from controller.member_data_validation import data_validate
+from utils.create_blueprint import blueprints
+from utils.member_data_validation import data_validate
 from data.member.insert_new_member import insert_member
 from data.member.login_query import login_query
-from data.password import jwt_key
+from dotenv import load_dotenv
+
+load_dotenv()
+jwt_key = os.getenv("jwt_key")
 
 membership = blueprints("membership")
 

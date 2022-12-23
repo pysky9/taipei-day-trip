@@ -148,6 +148,8 @@
 }
 
 .creditInfo{
+    display: flex;
+    align-items: center;
     margin-bottom: 30px;
     font-family: 'Noto Sans TC';
     font-style: normal;
@@ -186,6 +188,24 @@
     font-weight: 400;
     font-size: 19px;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* 金流 */
+.tpfield {
+    height: 40px;
+    width: 200px;
+    border: 1px solid gray;
+    margin: 5px 0;
+    /* padding: 5px; */
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #757575;
 }
 
 @media(max-width:1105px){

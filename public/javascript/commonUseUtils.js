@@ -88,7 +88,8 @@ function login(){
         else if(data.error){
             infoElem.textContent = `${data.message}`;
         }
-        infoElem.style.padding = "5px";
+        infoElem.style.paddingTop = "5px";
+        infoElem.style.marginBottom = "0px";
         memberBtn.insertAdjacentElement("afterend", infoElem);
         memberContainer.style.height = "295px";
         memberContainer.style.top = "225px";
@@ -128,7 +129,8 @@ function signup(){
         }else if (data.error){
             infoElem.textContent = `${data.message}`;
         }
-        infoElem.style.padding = "5px";
+        infoElem.style.paddingTop = "5px";
+        infoElem.style.marginBottom = "0px";
         memberBtn.insertAdjacentElement("afterend", infoElem);
         memberContainer.style.height = "362px";
         memberContainer.style.top = "258px";

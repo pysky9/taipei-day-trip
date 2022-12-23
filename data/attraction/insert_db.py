@@ -1,7 +1,11 @@
+import os
 import mysql.connector
 from mysql.connector.pooling import MySQLConnectionPool
 import json
-from password import password
+from dotenv import load_dotenv
+
+load_dotenv()
+password = os.get("password")
 
 db = mysql.connector.connect(
     host = "localhost",

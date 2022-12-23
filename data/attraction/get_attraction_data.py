@@ -1,5 +1,5 @@
 from flask import *
-from data.create_connection_pool import create_connection_pool
+from utils.create_connection_pool import create_connection_pool
 db_pool = create_connection_pool("attraction_pool", "attractions")
 
 def page_keywords(get_page, keyword):
