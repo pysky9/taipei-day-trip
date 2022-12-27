@@ -222,5 +222,4 @@ function errorMessageBox(message){
     messageContainer.appendChild(messageContent);
 
     bodyElem.insertAdjacentElement("afterend", messageContainer);
-
 }

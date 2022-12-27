@@ -388,7 +388,7 @@ function orderSubmit(event) {
 function sentToServer(parameter){
     const phoneNumber = document.querySelector("#phone");
     const prime = parameter;
-    console.log(fees)
+    
     phone = phoneNumber.value;
     if (!phone){
         errorMessageBox("請輸入手機號碼，謝謝。");
@@ -421,11 +421,11 @@ function sentToServer(parameter){
         body: JSON.stringify(requestData)
     }).then((response) => (response.json())).then(
         (responseData) => {
-            console.log(responseData);
+
             let paymentData = responseData.data;
             let orderNumber = paymentData.number;
             let paymentMessage = paymentData.payment.message;
-            console.log("line 429", orderNumber, paymentMessage);
+
             if(paymentMessage === "付款成功"){
                 location.replace(`/thankyou?number=${orderNumber}`);
             }else{
