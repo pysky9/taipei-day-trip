@@ -3,7 +3,7 @@
     width: 340px;
     height: 150px;
     position: absolute;
-    top: 165px;
+    top: 800px;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 12;
@@ -27,4 +27,10 @@
     font-size: 20px;
     color: #666666;
     line-height: 150px;
+}
+
+@media(max-width: 650px){
+    .messageContainer{
+        top: 1050px
+    }
 }

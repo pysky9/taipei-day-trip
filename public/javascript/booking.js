@@ -45,7 +45,6 @@ function checkBookingStatus(){
         siteAddress = attractionData.address;
         date = bookingInfo.date;
         fees = bookingInfo.price;
-        console.log(fees);
         tripTime = bookingInfo.time;
         let time;
         if (tripTime === "morning"){
@@ -442,7 +441,6 @@ function errorMessageBox(message){
     const messageContainer = document.createElement("div");
     messageContainer.className = "messageContainer";
     messageContainer.style.display = "block";
-    messageContainer.style.top = "750px";
 
     const messagePrefix = document.createElement("div");
     messagePrefix.className = "messagePrefix";
