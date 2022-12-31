@@ -1,4 +1,3 @@
-// import noBookingPage from "./javascript/booking.js";
 const loginBtnStatus = document.querySelector("#loginBtnStatus");
 const memberContainer = document.querySelector(".memberContainer");
 const memberTitle = document.querySelector(".memberTitle");
@@ -10,13 +9,33 @@ const emails = document.querySelector("#emails");
 const passwords = document.querySelector("#passwords");
 const bookingTrip = document.querySelector("#bookingTrip");
 
+
+const memberships = document.querySelector(".memberships");
+const backgroundForMember = document.querySelector(".backgroundForMember");
+const memberLogout = document.querySelector(".memberLogout");
+const historyOrder = document.querySelector(".historyOrder")
+
 loginBtnStatus.addEventListener("click", function(event){
     let userStatus = loginBtnStatus.textContent;
     if (userStatus === "登入/註冊"){
         clickLogin();
     }else{
-        logout();
+        // logout();
+        // location.href = "/membership"
+        memberships.style.display = "block";
+        backgroundForMember.style.display = "block";
+
     }
+})
+
+backgroundForMember.addEventListener("click",(event)=>{
+    memberships.style.display = "none";
+    backgroundForMember.style.display = "none";
+})
+
+memberLogout.addEventListener("click", logout)
+historyOrder.addEventListener("click",(event)=>{
+    location.href = "/membership";
 })
 
 function clickLogin(){
@@ -154,14 +173,14 @@ function checkLoginStatus(){
         return response.json();
     }).then(function(result){
         if(result.data){
-            let userData = result.data;
-
-            loginBtnStatus.textContent = "登出系統";
+            loginBtnStatus.textContent = "會員中心";
+            
         }else{
             loginBtnStatus.textContent = "登入/註冊";
         }
     })
 }
+
 
 checkLoginStatus();
 

@@ -89,7 +89,7 @@ def ordering():
         },
         "remember": True
     }
-    send_server = requests.post(url, headers = header_content, json = data)
+    send_server = requests.post(url, headers = header_content, json = data,)
     pay_result = send_server.json()
 
     if pay_result["status"] == 0:
@@ -189,3 +189,28 @@ def get_ordering_information(order_number):
     finally:
         order_cursor.close()
         order_db.close()
+
+@order.route("/api/ordered", methods = ["POST"])
+def ordered():
+    get_cookie = request.cookies.get("jwt")
+    if get_cookie == None:
+        error_message = {"error": True, "message": "未登入系統"}
+        return jsonify(error_message), 403
+    request_data = request.get_json()
+
+    try:
+        db = ordering_pool.get_connection()
+        query = db.cursor(dictionary = True)
+        sql_statement = "SELECT * FROM ordering WHERE member_id = %s ;"
+        query.execute(sql_statement,(request_data["id"],))
+        result = query.fetchall()
+        query.close()
+
+        if result == []:
+            return jsonify({"error": True, "message": "沒有歷史訂單"})
+        return jsonify(result)
+    except Exception as err:
+        print(err)
+        return jsonify({"error": True, "message": "系統錯誤"})
+    finally:
+        db.close()

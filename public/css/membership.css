@@ -1,0 +1,40 @@
+.membersInfoContainers{
+    width: 980px;
+    margin-top: 54px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+
+
+}
+
+.ordersHistoryContainer{
+    width: 980px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    border: 1px solid grey;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.noOrderMsg{
+    width:980px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 20px;
+    height: 150px;
+}
+
+@media(max-width: 980px){
+    .membersInfoContainers, .ordersHistoryContainer, .noOrderMsg{
+        width: 90%;
+    }
+}

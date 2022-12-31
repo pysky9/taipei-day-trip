@@ -299,8 +299,51 @@ body{
     margin-right:auto;
 }
 
+/* 會員中心選項清單 */
+.backgroundForMember{
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    /* background: #000000; */
+    /* opacity: 0.05; */
+    z-index: 11;
+    display:none;/*點登入或註冊 改為visible*/
+}
+
+.membershipsContainer{
+    width: 1200px;
+    display: flex;
+    justify-content: right;
+    margin-right:auto;
+    margin-left:auto;
+    
+}
+
+.memberships{
+    flex: none;
+    /* width: 1200px; */
+    display: none;
+    position: absolute;
+    /* right: 40px; */
+    top: 50px;
+    z-index: 12;
+    background-color: #f8f4f4;
+    border-radius: 6px;
+    text-align: end;
+}
+
+.historyOrder, .memberLogout{
+    margin-top: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
 @media(max-width: 1230px){
-    .nav, .slogan-1, .slogan-2, .search, .itemsContainer{width: 90%}
+    .nav, .slogan-1, .slogan-2, .search, .itemsContainer, .membershipsContainer{width: 90%}
 
     .container{
         width: 90%;
