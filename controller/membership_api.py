@@ -14,6 +14,10 @@ jwt_key = os.getenv("jwt_key")
 
 membership = blueprints("membership")
 
+@membership.route("/membership")
+def membership_page():
+    return render_template("membership.html")
+
 @membership.route("/api/user", methods = ["POST"])
 def signup():
     json_data = request.get_json()

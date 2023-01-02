@@ -3,6 +3,7 @@ const bodyElem = document.querySelector("body");
 navBar()
 footer()
 loginSignupMenu()
+membershipCenterMenu()
 
 function navBar(){
 
@@ -44,7 +45,7 @@ function navBar(){
 function footer(){
     const indexLastDiv = document.querySelector(".container");
     const attractionLastDiv = document.querySelector(".trafficInfo");
-    const orderedInfo = document.querySelector(".orderedInfoContainer")
+    const orderedInfo = document.querySelector(".orderedInfoContainer");
 
     const footerContainer = document.createElement("div");
     footerContainer.className = "footer";
@@ -137,5 +138,32 @@ function loginSignupMenu(){
     memberContainer.appendChild(memberStatus);
 
     backgroundGreyPage.insertAdjacentElement("afterend", memberContainer);
+
+}
+
+function membershipCenterMenu(){
+    const backgroundForMember = document.createElement("div");
+    backgroundForMember.className = "backgroundForMember";
+    bodyElem.insertAdjacentElement("afterend", backgroundForMember);
+
+    const membershipsContainer = document.createElement("div");
+    membershipsContainer.className = "membershipsContainer";
+
+    const memberships = document.createElement("div");
+    memberships.className = "memberships";
+
+    const historyOrder = document.createElement("div");
+    historyOrder.className = "historyOrder";
+    historyOrder.textContent = "歷史訂單";
+    memberships.appendChild(historyOrder);
+
+    const memberLogout = document.createElement("div");
+    memberLogout.className = "memberLogout";
+    memberLogout.textContent = "登出";
+    memberships.appendChild(memberLogout);
+
+    membershipsContainer.appendChild(memberships);
+
+    backgroundForMember.insertAdjacentElement("afterend", membershipsContainer)
 
 }

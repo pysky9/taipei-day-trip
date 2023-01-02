@@ -118,8 +118,19 @@ const bookingBtn = document.querySelector(".bookingBtn");
 bookingBtn.addEventListener("click",function(event){
     
     if (dates.value === ""){
-        const message = "請選擇日期，謝謝。";
-        errorMessageBox(message);
+        const dateError = document.createElement("span");
+        dateError.textContent = "請選擇日期，謝謝。";
+        dateError.style.color = "red";
+        dateError.style.paddingLeft = "5px";
+        dateError.style.fontFamily = "Noto Sans TC";
+        dateError.style.fontStyle = "normal";
+        dateError.style.fontWeight = "700";
+        dateError.style.fontSize = " 16px";
+        bookingBtn.insertAdjacentElement("afterend", dateError);
+        dates.addEventListener("click", function(event){
+            dateError.remove();
+        });
+
         return;
     };
     
