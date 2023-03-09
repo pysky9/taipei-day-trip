@@ -3,6 +3,8 @@
 
 這網站是我在WeHelp訓練營第一個專案，依照設計師提供的figma設計稿，透過HTML、CSS、JavaScript、Flask、MySQL建立網站，同時部署到AWS EC2。
 
+網站：http://taipeitrips.ddns.net:3000/
+
 網站測試帳號與密碼： test@test.com / test
 
 ![image](https://user-images.githubusercontent.com/60932746/210486521-86cf5151-cb9e-405f-84f5-654185436619.png)
